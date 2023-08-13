@@ -27,4 +27,29 @@
     <rabbit:admin connection-factory="connectionFactory" />
 
     <!-- ====== ====== -->
+    <rabbit:queue id="spring_fanout_queue_1" name="spring_fanout_queue_1" auto-declare="true" />
+
+    <rabbit:queue id="spring_fanout_queue_2" name="spring_fanout_queue_2" auto-declare="true" />
+
+    <rabbit:fanout-exchange id="spring_fanout_exchange" name="spring_fanout_exchange" auto-declare="true">
+        <rabbit:bindings>
+            <rabbit:binding queue="spring_fanout_queue_1" />
+            <rabbit:binding queue="spring_fanout_queue_2" />
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <rabbit:queue id="spring_topic_queue_star" name="spring_topic_queue_star" auto-declare="true" />
+    <rabbit:queue id="spring_topic_queue_well" name="spring_topic_queue_well" auto-declare="true" />
+    <rabbit:queue id="spring_topic_queue_well2" name="spring_topic_queue_well2" auto-declare="true" />
+
+    <rabbit:topic-exchange id="spring_topic_exchange" name="spring_topic_exchange" auto-declare="true">
+        <rabbit:bindings>
+            <rabbit:binding pattern="heima.*" queue="spring_topic_queue_star" />
+            <rabbit:binding pattern="heima.#" queue="spring_topic_queue_well" />
+            <rabbit:binding pattern="itcast.#" queue="spring_topic_queue_well2" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <!-- 定义rabbitTemplate对象操作可以在代码中方便发送消息 -->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" />
 </beans>
