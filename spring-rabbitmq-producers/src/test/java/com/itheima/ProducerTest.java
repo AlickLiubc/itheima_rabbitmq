@@ -21,4 +21,22 @@ public class ProducerTest {
         rabbitTemplate.convertAndSend("spring_queue", "hello world spring...");
     }
 
+    /**
+     * 发送fanout消息
+     */
+    @Test
+    public void testFanout() {
+        // 2.发送消息
+        rabbitTemplate.convertAndSend("spring_fanout_exchange", "", "spring fanout...");
+    }
+
+    /**
+     * 发送topic消息
+     */
+    @Test
+    public void testTopic() {
+        // 发送消息
+        rabbitTemplate.convertAndSend("spring_topic_exchange", "heima.heihei.hahha", "spring topic...");
+    }
+
 }
