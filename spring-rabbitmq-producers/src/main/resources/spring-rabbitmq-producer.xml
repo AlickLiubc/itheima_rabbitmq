@@ -23,7 +23,8 @@
                                port="${rabbitmq.port}"
                                username="${rabbitmq.username}"
                                password="${rabbitmq.password}"
-                               virtual-host="${rabbitmq.virtual-host}" />
+                               virtual-host="${rabbitmq.virtual-host}"
+                               publisher-confirms="true" />
 
     <!-- 定义管理交换机、队列 -->
     <rabbit:admin connection-factory="connectionFactory" />
@@ -65,4 +66,12 @@
 
     <!-- 定义rabbitTemplate对象操作可以在代码中方便发送消息 -->
     <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" />
+
+    <!-- 消息的可靠性投递(生产端) -->
+    <rabbit:queue id="test_queue_confirm" name="test_queue_confirm"></rabbit:queue>
+    <rabbit:direct-exchange name="test_exchange_confirm">
+        <rabbit:bindings>
+            <rabbit:binding queue="test_queue_confirm" key="confirm"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
 </beans>
