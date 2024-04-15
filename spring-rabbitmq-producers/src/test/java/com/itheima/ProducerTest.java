@@ -46,6 +46,7 @@ public class ProducerTest {
      *      1. 确认模式开启：publisher-confirms="true"
      *      2. 在rabbitTemplate定义ConfirmCallBack回调函数
      */
+    @Test
     public void testConfirm() {
         // 2.定义回调
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
@@ -71,7 +72,7 @@ public class ProducerTest {
         });
 
         // 3.发送消息
-        rabbitTemplate.convertAndSend("test_queue_confirm", "confirm", "message confirm...");
+        rabbitTemplate.convertAndSend("test_exchange_confirm", "confirm", "message confirm...");
     }
 
 }
