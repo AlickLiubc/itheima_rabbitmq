@@ -115,7 +115,7 @@ public class ProducerTest {
         });
 
         // 3.发送消息
-        rabbitTemplate.convertAndSend("test_exchange_confirm", "confirm...", "message confirm...");
+        rabbitTemplate.convertAndSend("test_exchange_confirm", "confirm", "message confirm...");
     }
 
 }

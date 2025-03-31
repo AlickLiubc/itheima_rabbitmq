@@ -31,4 +31,11 @@
     <rabbit:listener-container connection-factory="connectionFactory" auto-declare="true">
         <rabbit:listener ref="springQueueListener" queue-names="spring_queue" />
     </rabbit:listener-container>
+
+    <context:component-scan base-package="com.itheima.rabbitmq" />
+
+    <rabbit:listener-container connection-factory="connectionFactory"
+                               acknowledge="manual">
+        <rabbit:listener ref="ackListener" queue-names="test_queue_confirm" />
+    </rabbit:listener-container>
 </beans>
